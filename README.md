@@ -32,7 +32,7 @@ Zoom-Refine enhances MLLM understanding of high-resolution images in a two-step,
 
 1.  **Clone the repository:**
     ```bash
-    git clonehttps://github.com/xavier-yu114/NIPS2025.git
+    git clone https://github.com/xavier-yu114/NIPS2025.git
     cd Zoom-Refine
     ```
 
