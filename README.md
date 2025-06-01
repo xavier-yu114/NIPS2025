@@ -1,4 +1,4 @@
-#  <img src="asset/logo.png" alt="Example Image" width="40" style="margin-bottom:-50px"/> Zoom-Refine: Boosting High-Resolution Multimodal Understanding via Localized Zoom and Self-Refinement
+# Zoom-Refine: Boosting High-Resolution Multimodal Understanding via Localized Zoom and Self-Refinement
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) 
 
