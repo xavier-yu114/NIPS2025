@@ -33,6 +33,23 @@ Our experiments utilize the following publicly available benchmarks,you could do
 * [MME-RealWorld](https://huggingface.co/datasets/yifanzhang114/MME-RealWorld)
 * [HR-Bench](https://huggingface.co/datasets/DreamMr/HR-Bench)
 
+After downloading the datasets, their JSON files need to be converted into a standardized format for evaluation with our framework. We provide scripts for this conversion:
+For MME-RealWorld use the `scripts/convert.py`
+For HR-Bench use the `scripts/build_json.py`
+
+**Standardized MCQA Format:**
+
+The preprocessing scripts will convert the benchmark data into the following standardized Multiple-Choice Question-Answering (MCQA) format, which is then used to prompt the MLLM for evaluation:
+```
+[Image] [Question] The choices are listed below:
+(A) [Choice A]
+(B) [Choice B]
+(C) [Choice C]
+(D) [Choice D]
+(E) [Choice E]
+Select the best answer to the above multiple-choice question based on the image. Respond with only the letter (A, B, C, D, or E) of the correct option. 
+The best answer is:
+```
 ## 🛠️Installation
 
 1.  **Clone the repository:**
@@ -72,7 +89,7 @@ Our experiments utilize the following publicly available benchmarks,you could do
       # export API_KEY="YOUR_API_KEY"
       ```
 *   Locally-run models (e.g., InternVL3-14B/8B/2B from Hugging Face):
-    For locally run models, download the weights from their official sources (e.g., Hugging Face) and update model paths in the configuration files or scripts.
+    For locally run models, download the weights from their official sources (e.g., Hugging Face).Ensure your environment is configured as described in the "Install Dependencies" section above and update model paths in the configuration files or scripts.
 
 ## Usage
 
