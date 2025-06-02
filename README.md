@@ -19,7 +19,7 @@ Zoom-Refine enhances MLLM understanding of high-resolution images in a two-step,
 2.  **Self-Refinement:** A high-resolution crop is extracted from the original image based on the predicted bounding box. This crop, along with the initial context (original query, downsampled image, initial answer), is fed back to the MLLM, which then re-evaluates and refines its answer.
 
 
-## 📚 Preparation
+## 📦 Preparation
 ### 1.MLLM checkpoints
 Our experiments primarily use models from the InternVL series, you could download these checkpoints before running.
 * [InternVL3-78B](https://huggingface.co/OpenGVLab/InternVL3-78B)
@@ -35,7 +35,7 @@ Our experiments utilize the following publicly available benchmarks,you could do
 
 After downloading the datasets, their JSON files need to be converted into a standardized format for evaluation with our framework. We provide scripts for this conversion:
 For MME-RealWorld use the `scripts/convert.py`
-For HR-Bench use the `scripts/build_json.py`
+For HR-Bench，you can use the `scripts/convert_parquet.py` to download the benchmark and use the `scripts/build_json.py` to convert to the expected format.
 
 **Standardized MCQA Format:**
 
@@ -91,18 +91,39 @@ The best answer is:
 *   Locally-run models (e.g., InternVL3-14B/8B/2B from Hugging Face):
     For locally run models, download the weights from their official sources (e.g., Hugging Face).Ensure your environment is configured as described in the "Install Dependencies" section above and update model paths in the configuration files or scripts.
 
-## Usage
+## 🚀 Evaluation
+This section outlines how to evaluate the Zoom-Refine method on the MME-RealWorld and HR-Bench benchmarks using the provided scripts.
 
-The core of Zoom-Refine involves a two-stage prompting strategy.
+**A. Evaluating Baseline Performance**
 
-### 1. Localized Zoom Step
+**1. Using API-based Models :**
+   To evaluate the baseline performance of an API-based model:
+   ```bash
+   python evaluation/API.py     
+   ```
 
-The MLLM is prompted to provide an initial answer and identify a critical image region (bounding box) relevant to the question.
+**2. Using Locally-run Models :**
+   To evaluate the baseline performance of a locally-run model:
+   ```bash
+   python evaluation/base.py
+   ```
+After you get your evaluation results,you can use `evaluation/eval_acc.py` to calculate the accuracy from the baseline prediction files.
 
-**Example Prompt (`Ploc` - see Figure 2 in the paper):**# Zoom-Refine: Boosting High-Resolution Multimodal Understanding via Localized Zoom and Self-Refinement
+**B. Evaluating with Zoom-Refine**
 
-### 2. Self-Refinement Step
+**1. Using API-based Models :**
+   To evaluate with Zoom-Refine using an API-based model:
+   ```bash
+   python zoomrefine/ZoomRefine_API.py 
+   ```
 
-The MLLM receives the original image (or its downsampled version), the initial query, its preliminary answer, and the high-resolution crop. It's then prompted to re-evaluate its initial hypothesis.
+**2. Using Locally-run Models:**
+   To evaluate with Zoom-Refine using a locally-run model:
+   ```bash
+   python zoomrefine/ZoomRefine_Base.py
+   ```
+After you get your evaluation results,you can use `zoomrefine/zoomrefine_acc.py` to calculate the accuracy from the Zoom-Refine prediction files.
 
-**Example Prompt (`Prefine` - see Figure 2 in the paper):**
+
+
+
